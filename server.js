@@ -32,6 +32,7 @@ function searchBooks(req, res,){
         console.log(books);
         res.render('pages/searches/show',{data: books});
     })
+    .catch(res.render('pages/error'));
 }
 
 function Book(obj) {
