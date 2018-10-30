@@ -4,7 +4,21 @@
 
 </head>
 <body>
-
+    <% data.forEach(book => { %>
+        <Ul>
+            <img src = "<%= book.image_url %>">
+    
+            <li>
+                <%= book.title %>
+            </li>
+            <li>
+                <%= book.author %>
+            </li>
+            <li>
+                <%= book.description %>
+            </li>
+        </Ul>
+   <% }) %>
 </body>
 
 </html>
