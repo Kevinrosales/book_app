@@ -1,0 +1,38 @@
+<!DOCTYPE HTML5>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
+    <link rel="stylesheet" href="styles/icons.css">
+
+
+</head>
+
+<body>
+
+    <header>
+
+    </header>
+    <main>
+        <form action="/searches" method="post">
+            <input type="text" name="search" value="title" required>
+            <label for="title">
+                <span>Title</span>
+                <input type="radio" name="search" value="title" required>
+            </label>
+            <label for="author">
+                <span>Author</span>
+                <input type="radio" name="search" value="author" required>
+            </label>
+            <button type="submit">Search books here!</button>
+
+        </form>
+    </main>
+
+</body>
+
+
+</html>
