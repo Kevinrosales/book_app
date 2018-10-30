@@ -1,23 +1,21 @@
 <!DOCTYPE HTML5>
 <html>
 <head>
-
+        <link rel="stylesheet" href="styles/reset.css">
+        <link rel="stylesheet" href="styles/base.css">
+        <link rel="stylesheet" href="styles/layout.css">
+        <link rel="stylesheet" href="styles/modules.css">
+        <link rel="stylesheet" href="styles/icons.css">
 </head>
 <body>
     <% data.forEach(book => { %>
-        <Ul>
+        <section>
             <img src = "<%= book.image_url %>">
     
-            <li>
-                <%= book.title %>
-            </li>
-            <li>
-                <%= book.author %>
-            </li>
-            <li>
-                <%= book.description %>
-            </li>
-        </Ul>
+            <h4><%= book.title %></h4>
+            <h5><%= book.author %></h5>
+            <p><%= book.description %></p>
+        </section>
    <% }) %>
 </body>
 
