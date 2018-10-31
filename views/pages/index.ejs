@@ -2,14 +2,7 @@
 <html>
 
 <head>
-    <meta name="viewport" content="device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/modules.css">
-    <link rel="stylesheet" href="styles/icons.css">
-
-
+    <%- include('../layout/head.ejs'); %>
 </head>
 
 <body>
@@ -18,21 +11,27 @@
 
     </header>
     <main>
-        <form action="/searches" method="post">
-            <input type="text" name="search" value="title" required>
-            <label for="title">
-                <span>Title</span>
-                <input type="radio" name="search" value="title" required>
-            </label>
-            <label for="author">
-                <span>Author</span>
-                <input type="radio" name="search" value="author" required>
-            </label>
-            <button type="submit">Search books here!</button>
+            <% data.forEach(book => { %>
+                <section>
+                    <img src = "<%= book.image_url %>">
+            
+                    <h4><%= book.title %></h4>
+                    <h5><%= book.author %></h5>
+                    <p><%= book.description %></p>
+                    <p> <%= book.isbn %></p>
+                    <p> Bookshelf: <%= book.bookshelf %></p>
+                    <button name="select">Update Details</button>
+                </section>
+           <% }) %>
 
-        </form>
     </main>
 
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+    <script src="../../public/js/app.js"
 </body>
 
 

@@ -1,12 +1,7 @@
 <!DOCTYPE HTML5>
 <html>
 <head>
-        <meta name="viewport" content="device-width, initial-scale=1">
-        <link rel="stylesheet" href="styles/reset.css">
-        <link rel="stylesheet" href="styles/base.css">
-        <link rel="stylesheet" href="styles/layout.css">
-        <link rel="stylesheet" href="styles/modules.css">
-        <link rel="stylesheet" href="styles/icons.css">
+    <%- include("../../layout/head.ejs") %>
 </head>
 <body>
     <% data.forEach(book => { %>
@@ -16,6 +11,7 @@
             <h4><%= book.title %></h4>
             <h5><%= book.author %></h5>
             <p><%= book.description %></p>
+            <button name="select">Select This Book</button>
         </section>
    <% }) %>
 </body>
