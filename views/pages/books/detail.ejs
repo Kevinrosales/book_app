@@ -1,0 +1,44 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <%- include('../../layout/head') %>
+</head>
+<body>
+        
+        <section>
+                <img src = "<%= data.image_url %>">
+        
+                <h4><%= data.title %></h4>
+                <h5><%= data.author %></h5>
+                <p><%= data.description %></p>
+                <p> <%= data.isbn %></p>
+                <p> Bookshelf: <%= data.bookshelf %></p>
+                <button id="edit">Edit Details</button>
+        </section>
+
+        <form class="hidden" action="/details/<%=data.id%>" method="post">
+            <img src = "<%= data.image_url %>">
+            <label for="<%= data.title%>">Title
+                <input type="text" name="edits" value="<%= data.title%>" required>
+            </label>
+
+            <label for="<%= data.author%>">Author
+                <input type="text" name="edits" value="<%= data.author%>" required>
+            </label>
+            
+            <label for="<%= data.description%>">Description
+                <input type="text" name="edits" value="<%= data.description%>" required>
+            </label>
+
+            <label for="<%= data.isbn%>">ISBN
+                <input type="text" name="edits" value="<%= data.isbn%>" required>
+            </label>
+
+            <label for="<%= data.bookshelf%>">Bookshelf
+                <input type="text" name="edits" value="<%= data.bookshelf%>" required>
+            </label>
+                    
+
+        </form>
+</body>
+</html>

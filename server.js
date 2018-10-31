@@ -17,8 +17,9 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`app is up on ${PORT}`));
+app.listen(PORT, () => console.log(`app is up on${PORT}`));
 app.get('/', renderHome);
+app.get('/details/:id', showBook);
 
 
 function handleError(res, error) {
@@ -64,4 +65,15 @@ function Book(obj) {
   this.image_url = obj.volumeInfo.imageLinks.thumbnail ? obj.volumeInfo.imageLinks.thumbnail : '';
   this.description = obj.volumeInfo.description ? obj.volumeInfo.description : 'No description avialable';
   this.isbn = obj.volumeInfo.industryIdentifiers ? 'ISBN: ' + obj.volumeInfo.industryIdentifiers[0].identifier : 'ISBN not provided';
+}
+
+//---------------Modify books----------------\\
+
+function showBook(req, res) {
+  console.log(req.params.id);
+  client.query(`SELECT * FROM saved WHERE id=${req.params.id};`)
+    .then(results => {
+      console.log(results.rows[0]);
+      res.render('./pages/books/detail.ejs', {data: results.rows[0]})
+    })
 }
