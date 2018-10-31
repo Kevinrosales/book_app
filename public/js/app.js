@@ -6,3 +6,10 @@ $('button').on('click', e => {
   location.href =`/details/${e.target.id}`;
 //   $.get(`/modify/${e.target.id}`);
 });
+
+
+// $('#edit').on('click', displayForm)
+
+// function displayForm() {
+//     $('section').togg
+// }
