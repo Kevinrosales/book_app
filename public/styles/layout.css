@@ -13,3 +13,13 @@ h4, h5{
 img{
     width: 60%;
 }
+
+form{
+    border: 1px solid black;
+    width: 85%;
+    display:flex;
+    margin: auto auto 5% auto;
+    padding: 2%;
+    flex-direction: column;
+    align-items: center;
+}

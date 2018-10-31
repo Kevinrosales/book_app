@@ -1,15 +1,10 @@
 'use strict';
 
-$('button').on('click', e => {
-  console.log('clicked');
-  console.log(e.target.id);
-  location.href =`/details/${e.target.id}`;
-//   $.get(`/modify/${e.target.id}`);
-});
+$('#edit').on('click', displayForm)
 
-
-// $('#edit').on('click', displayForm)
-
-// function displayForm() {
-//     $('section').togg
-// }
+function displayForm() {
+    // console.log('hello');
+  $('section').toggleClass('hidden');
+  $('#edit').toggleClass('hidden');
+  $('form').toggleClass('hidden');
+}

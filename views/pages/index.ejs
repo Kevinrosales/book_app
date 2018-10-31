@@ -20,7 +20,7 @@
                     <p><%= book.description %></p>
                     <p> <%= book.isbn %></p>
                     <p> Bookshelf: <%= book.bookshelf %></p>
-                    <button id="<%=book.id%>">View Details</button>
+                    <a href="/details/<%=book.id%>">View Details</a>
                 </section>
            <% }) %>
 
