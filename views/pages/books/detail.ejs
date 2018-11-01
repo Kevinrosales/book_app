@@ -11,7 +11,7 @@
                 <h4><%= data.title %></h4>
                 <h5><%= data.author %></h5>
                 <p><%= data.description %></p>
-                <p> <%= data.isbn %></p>
+                <p> ISBN: <%= data.isbn %></p>
                 <p> Bookshelf: <%= data.bookshelf %></p>
                 <button id="edit">Edit Details</button>
         </section>
@@ -30,7 +30,7 @@
                 <input type="text" name="edits" value="<%= data.description%>" required>
             </label>
 
-            <label for="<%= data.isbn%>">ISBN
+            <label for="<%= data.isbn%>">ISBN: 
                 <input type="text" name="edits" value="<%= data.isbn%>" required>
             </label>
 
