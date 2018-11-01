@@ -3,6 +3,8 @@
 <head>
     <%- include("../../layout/head.ejs") %>
 </head>
+<%- include('../../layout/header.ejs'); %>
+
 <body>
     <form action="/searches" method="post">
         <input type="text" name="search" value="title" required>
