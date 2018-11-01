@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`app is up on${PORT}`));
 app.get('/', renderHome);
 app.get('/details/:id', showBook);
+app.post('/details/:id', updateBook)
 
 
 function handleError(res, error) {
@@ -75,5 +76,19 @@ function showBook(req, res) {
     .then(results => {
       console.log(results.rows[0]);
       res.render('./pages/books/detail.ejs', {data: results.rows[0]})
+    })
+}
+
+function updateBook(req, res) {
+  console.log(req.params.id);
+  console.log(req.body.edits);
+  const SQL = `UPDATE saved SET title=$1, author=$2, description=$3, isbn=$4, bookshelf=$5 WHERE id=${req.params.id};`;
+  const values = req.body.edits;
+  client.query(SQL, values)
+    .then(() => {
+      client.query(`SELECT * FROM saved WHERE id=${req.params.id};`)
+        .then(results => {
+          res.render('./pages/books/detail.ejs', {data: results.rows[0]})
+        })
     })
 }
