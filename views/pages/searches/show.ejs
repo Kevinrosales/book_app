@@ -5,15 +5,49 @@
 </head>
 <body>
     <% data.forEach(book => { %>
-        <section>
+    <div>
+        <section class="<%= book.title %>">
             <img src = "<%= book.image_url %>">
     
             <h4><%= book.title %></h4>
             <h5><%= book.author %></h5>
             <p><%= book.description %></p>
-            <button name="select">Select This Book</button>
+            <button class="<%= book.title %>" name="select">Save This Book</button>
         </section>
-   <% }) %>
-</body>
 
+        <form class="<%= book.title %> hidden" action="/" method="post">
+            <img src = "<%= book.image_url %>">
+            <input type="hidden" name="details" value = "<%= book.image_url %>">
+            <label for="<%= book.title%>">Title
+                <input type="text" name="details" value="<%= book.title%>" required>
+            </label>
+
+            <label for="<%= book.author%>">Author
+                <input type="text" name="details" value="<%= book.author%>" required>
+            </label>
+            
+            <label for="<%= book.description%>">Description
+                <input type="text" name="details" value="<%= book.description%>" required>
+            </label>
+
+            <label for="<%= book.isbn%>">ISBN: 
+                <input type="text" name="details" value="<%= book.isbn%>" required>
+            </label>
+
+            <label for="<%= book.bookshelf%>">Bookshelf
+                <input type="text" name="details" required>
+            </label>
+                  
+            <button>Save</button>
+
+        </form>
+    </div>
+   <% }) %>
+   <script
+   src="https://code.jquery.com/jquery-3.3.1.min.js"
+   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+   crossorigin="anonymous"></script>
+
+   <script src="../js/app.js"></script>
+</body>
 </html>

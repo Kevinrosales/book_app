@@ -17,6 +17,7 @@
         </section>
 
         <form class="hidden" action="/details/<%=data.id%>" method="post">
+            <input type="hidden" name="_method" value="PUT">
             <img src = "<%= data.image_url %>">
             <label for="<%= data.title%>">Title
                 <input type="text" name="edits" value="<%= data.title%>" required>

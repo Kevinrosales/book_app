@@ -3,6 +3,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 require(`dotenv`).config();
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -15,12 +16,21 @@ let app = express();
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
+app.use(methodOverride((req, res)=>{
+  if (typeof(req.body)==='object' && '_method'in req.body){
+    let method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}))
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`app is up on${PORT}`));
 app.get('/', renderHome);
+app.post('/', saveBook);
 app.get('/details/:id', showBook);
-app.post('/details/:id', updateBook)
+app.put('/details/:id', updateBook);
+app.get('/searches', newSearch);
 
 
 function handleError(res, error) {
@@ -36,6 +46,13 @@ function renderHome(req, res) {
     })
 }
 
+function saveBook(req, res){
+  const SQL = `INSERT INTO saved (image_url, title, author, description, isbn, bookshelf) VALUES ($1,$2,$3,$4,$5,$6)`
+  const values = req.body.details;
+
+  client.query(SQL, values)
+  .then(renderHome(req, res));
+}
 //+++++++++++++++BOOK SEARCH++++++++++++++++\\
 app.post('/searches', searchBooks)
 
@@ -65,7 +82,7 @@ function Book(obj) {
   this.author = obj.volumeInfo.authors ? obj.volumeInfo.authors.join(', ') : 'Unknown Author';
   this.image_url = obj.volumeInfo.imageLinks.thumbnail ? obj.volumeInfo.imageLinks.thumbnail : '';
   this.description = obj.volumeInfo.description ? obj.volumeInfo.description : 'No description avialable';
-  this.isbn = obj.volumeInfo.industryIdentifiers ? 'ISBN: ' + obj.volumeInfo.industryIdentifiers[0].identifier : 'ISBN not provided';
+  this.isbn = obj.volumeInfo.industryIdentifiers ? obj.volumeInfo.industryIdentifiers[0].identifier : 'ISBN not provided';
 }
 
 //---------------Modify books----------------\\
@@ -91,4 +108,10 @@ function updateBook(req, res) {
           res.render('./pages/books/detail.ejs', {data: results.rows[0]})
         })
     })
+}
+
+//---------------search books----------------\\
+
+function newSearch(req, res){
+  res.render('./pages/searches/new.ejs');
 }
