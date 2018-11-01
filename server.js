@@ -19,8 +19,10 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`app is up on${PORT}`));
 app.get('/', renderHome);
+app.post('/', saveBook);
 app.get('/details/:id', showBook);
-app.post('/details/:id', updateBook)
+app.post('/details/:id', updateBook);
+app.get('/searches', newSearch);
 
 
 function handleError(res, error) {
@@ -36,6 +38,13 @@ function renderHome(req, res) {
     })
 }
 
+function saveBook(req, res){
+  const SQL = `INSERT INTO saved (image_url, title, author, description, isbn, bookshelf) VALUES ($1,$2,$3,$4,$5,$6)`
+  const values = req.body.details;
+
+  client.query(SQL, values)
+  .then(renderHome(req, res));
+}
 //+++++++++++++++BOOK SEARCH++++++++++++++++\\
 app.post('/searches', searchBooks)
 
@@ -65,7 +74,7 @@ function Book(obj) {
   this.author = obj.volumeInfo.authors ? obj.volumeInfo.authors.join(', ') : 'Unknown Author';
   this.image_url = obj.volumeInfo.imageLinks.thumbnail ? obj.volumeInfo.imageLinks.thumbnail : '';
   this.description = obj.volumeInfo.description ? obj.volumeInfo.description : 'No description avialable';
-  this.isbn = obj.volumeInfo.industryIdentifiers ? 'ISBN: ' + obj.volumeInfo.industryIdentifiers[0].identifier : 'ISBN not provided';
+  this.isbn = obj.volumeInfo.industryIdentifiers ? obj.volumeInfo.industryIdentifiers[0].identifier : 'ISBN not provided';
 }
 
 //---------------Modify books----------------\\
@@ -91,4 +100,10 @@ function updateBook(req, res) {
           res.render('./pages/books/detail.ejs', {data: results.rows[0]})
         })
     })
+}
+
+//---------------search books----------------\\
+
+function newSearch(req, res){
+  res.render('./pages/searches/new.ejs');
 }

@@ -1,13 +1,21 @@
-<form action="/searches" method="post">
-    <input type="text" name="search" value="title" required>
-    <label for="title">
-        <span>Title</span>
-        <input type="radio" name="search" value="title" required>
-    </label>
-    <label for="author">
-        <span>Author</span>
-        <input type="radio" name="search" value="author" required>
-    </label>
-    <button type="submit">Search books here!</button>
+<!DOCTYPE HTML5>
+<html>
+<head>
+    <%- include("../../layout/head.ejs") %>
+</head>
+<body>
+    <form action="/searches" method="post">
+        <input type="text" name="search" value="title" required>
+        <label for="title">
+            <span>Title</span>
+            <input type="radio" name="search" value="title" required>
+        </label>
+        <label for="author">
+            <span>Author</span>
+            <input type="radio" name="search" value="author" required>
+        </label>
+        <button type="submit">Search books here!</button>
 
-</form>
+    </form>
+</body>
+</html>
