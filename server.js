@@ -3,6 +3,7 @@
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 require(`dotenv`).config();
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -15,13 +16,20 @@ let app = express();
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
+app.use(methodOverride((req, res)=>{
+  if (typeof(req.body)==='object' && '_method'in req.body){
+    let method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}))
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`app is up on${PORT}`));
 app.get('/', renderHome);
 app.post('/', saveBook);
 app.get('/details/:id', showBook);
-app.post('/details/:id', updateBook);
+app.put('/details/:id', updateBook);
 app.get('/searches', newSearch);
 
 
