@@ -1,19 +1,23 @@
 'use strict';
 
-$('#edit').on('click', displayForm);
+$('document').ready(() => {
 
-$('button[class]').on('click', displayForm);
+  $('#edit').on('click', displayForm);
+  $('button[class]').on('click', displayForm);
 
-
-function displayForm(e) {
-  if (e.target.className){
-    $(`section[class="${e.target.className}"]`).toggleClass('hidden');
-    $(`button[class="${e.target.className}"]`).toggleClass('hidden');
-    $(`form[class*="${e.target.className}"]`).toggleClass('hidden');
+  function displayForm(e) {
+    if (e.target.className){
+      $(`section[class="${e.target.className}"]`).toggleClass('hidden');
+      $(`button[class="${e.target.className}"]`).toggleClass('hidden');
+      $(`form[class*="${e.target.className}"]`).toggleClass('hidden');
+    }
+    else{
+      $('section').toggleClass('hidden');
+      $('#edit').toggleClass('hidden');
+      $('form').toggleClass('hidden');
+    }
   }
-  else{
-    $('section').toggleClass('hidden');
-    $('#edit').toggleClass('hidden');
-    $('form').toggleClass('hidden');
-  }
-}
+
+
+})
+

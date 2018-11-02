@@ -14,7 +14,7 @@
                 <h5><%= data.author %></h5>
                 <p><%= data.description %></p>
                 <p> ISBN: <%= data.isbn %></p>
-                <p> Bookshelf: <%= data.bookshelf %></p>
+                <p> Bookshelf: <span id="bookshelf"><%= data.bookshelf %></span></p>
                 <button id="edit">Edit Details</button>
             <form id="container" action="/" method="POST">
                     <input type="hidden" name="_method" value="Delete">
@@ -42,9 +42,15 @@
             </label>
 
             <label>Bookshelf
-                <select name="edits" selected="<%= data.bookshelf%>">
+                <select name="edits">
                     <% bookshelves.forEach(shelf => { %>
-                        <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option>
+                        <% if (data.bookshelf === shelf.bookshelf) { %>
+                            <option value="<%= shelf.bookshelf %>" selected>
+                            <%= shelf.bookshelf %></option>
+                        <% } else {%> 
+                            <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option> 
+                            <% } %>
+
                     <% }) %>
                 </select>
             </label>
