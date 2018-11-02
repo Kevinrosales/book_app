@@ -16,6 +16,10 @@
                 <p> ISBN: <%= data.isbn %></p>
                 <p> Bookshelf: <%= data.bookshelf %></p>
                 <button id="edit">Edit Details</button>
+            <form id="container" action="/" method="POST">
+                    <input type="hidden" name="_method" value="Delete">
+                    <button id="delete">Delete this book</button>
+            </form>
         </section>
 
         <form class="hidden" action="/details/<%=data.id%>" method="post">
