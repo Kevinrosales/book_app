@@ -28,10 +28,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`app is up on${PORT}`));
 app.get('/', renderHome);
 app.post('/', saveBook);
+app.delete('/delete/:id', deleteBook);
 app.get('/details/:id', showBook);
 app.put('/details/:id', updateBook);
 app.get('/searches', newSearch);
-
 
 function handleError(res, error) {
   console.log(error);
@@ -114,4 +114,13 @@ function updateBook(req, res) {
 
 function newSearch(req, res){
   res.render('./pages/searches/new.ejs');
+}
+
+//---------------delete books----------------\\
+
+function deleteBook(req, res){
+const SQL = `DELETE FROM saved WHERE id = ${req.params.id};`;
+
+client.query(SQL)
+.then(res.redirect('/'));
 }
