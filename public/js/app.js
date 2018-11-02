@@ -4,6 +4,7 @@ $('#edit').on('click', displayForm);
 
 $('button[class]').on('click', displayForm);
 
+
 function displayForm(e) {
   if (e.target.className){
     $(`section[class="${e.target.className}"]`).toggleClass('hidden');

@@ -8,11 +8,6 @@
 <%- include('../layout/header.ejs'); %>
 
 <body>
-    <select name="filter">
-        <% bookshelves.forEach(shelf => { %>
-            <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option>
-        <% }) %>
-    </select>
     <main>
             <% data.forEach(book => { %>
                 <section>

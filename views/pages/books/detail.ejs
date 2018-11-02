@@ -41,8 +41,12 @@
                 <input type="text" name="edits" value="<%= data.isbn%>" required>
             </label>
 
-            <label for="<%= data.bookshelf%>">Bookshelf
-                <input type="text" name="edits" value="<%= data.bookshelf%>" required>
+            <label for="shelf">Bookshelf
+                <select name="edits" selected="<%= data.bookshelf%>">
+                    <% bookshelves.forEach(shelf => { %>
+                        <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option>
+                    <% }) %>
+                </select>
             </label>
                   
             <button>Save</button>
