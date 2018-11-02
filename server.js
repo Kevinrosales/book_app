@@ -51,7 +51,7 @@ function saveBook(req, res){
   const values = req.body.details;
 
   client.query(SQL, values)
-  .then(renderHome(req, res));
+    .then(renderHome(req, res));
 }
 //+++++++++++++++BOOK SEARCH++++++++++++++++\\
 app.post('/searches', searchBooks)
@@ -91,8 +91,11 @@ function showBook(req, res) {
   console.log(req.params.id);
   client.query(`SELECT * FROM saved WHERE id=${req.params.id};`)
     .then(results => {
-      console.log(results.rows[0]);
-      res.render('./pages/books/detail.ejs', {data: results.rows[0]})
+      client.query('SELECT DISTINCT bookshelf FROM saved')
+        .then(shelves => {
+          console.log(results.rows);
+          res.render('./pages/books/detail.ejs', {data: results.rows[0], bookshelves: shelves.rows});
+        })
     })
 }
 
@@ -103,10 +106,7 @@ function updateBook(req, res) {
   const values = req.body.edits;
   client.query(SQL, values)
     .then(() => {
-      client.query(`SELECT * FROM saved WHERE id=${req.params.id};`)
-        .then(results => {
-          res.render('./pages/books/detail.ejs', {data: results.rows[0]})
-        })
+      showBook(req, res);
     })
 }
 
