@@ -9,7 +9,9 @@
 
 <body>
     <select name="filter">
-
+        <% bookshelves.forEach(shelf => { %>
+            <option value="<%= shelf.bookshelf %>"><%= shelf.bookshelf %></option>
+        <% }) %>
     </select>
     <main>
             <% data.forEach(book => { %>
@@ -18,9 +20,9 @@
             
                     <h4><%= book.title %></h4>
                     <h5><%= book.author %></h5>
-                    <p><%= book.description %></p>
+                    <!-- <p><%= book.description %></p>
                     <p> ISBN: <%= book.isbn %></p>
-                    <p> Bookshelf: <%= book.bookshelf %></p>
+                    <p> Bookshelf: <%= book.bookshelf %></p> -->
                     <a href="/details/<%=book.id%>">View Details</a>
                 </section>
            <% }) %>

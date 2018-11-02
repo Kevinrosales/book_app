@@ -42,7 +42,11 @@ function handleError(res, error) {
 function renderHome(req, res) {
   client.query(`SELECT * FROM saved`)
     .then(results => {
-      res.render('pages/index.ejs', {data: results.rows});
+      client.query('SELECT DISTINCT bookshelf FROM saved')
+        .then(shelves => {
+          console.log(shelves.rows);
+          res.render('pages/index.ejs', {data: results.rows, bookshelves: shelves.rows});
+        })
     })
 }
 
@@ -51,7 +55,7 @@ function saveBook(req, res){
   const values = req.body.details;
 
   client.query(SQL, values)
-  .then(renderHome(req, res));
+    .then(renderHome(req, res));
 }
 //+++++++++++++++BOOK SEARCH++++++++++++++++\\
 app.post('/searches', searchBooks)
